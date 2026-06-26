@@ -17,5 +17,11 @@ Java
 Redes
 SQL Server
 
+## Cómo contactarme
+
+- GitHub: https://github.com/rolopezag-droid
+- Correo: rolopezag@ittepic.edu.mx
+- Teléfono: 324 112 3672
+
 #Pelicula o serie
 The 100
