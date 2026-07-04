@@ -1,322 +1,161 @@
-\# U2 - Actividad 1
+# U2 - Actividad 1
 
+## Consultas MongoDB
 
-
-\## Consultas MongoDB
-
-
-
-1\. Mostrar todos los libros publicados después del año 2022.
-
-
+1. Mostrar todos los libros publicados después del año 2022.
 
 ```javascript
-
-db\\\["libros"].find({ año: { $gt: 2022 } })
-
+db["libros"].find({ anio: { $gt: 2022 } })
 ```
 
-
-
-2\. Mostrar los usuarios cuya edad sea mayor o igual a 21 años.
-
-
+2. Mostrar los usuarios cuya edad sea mayor o igual a 21 años.
 
 ```javascript
-
-db\\\["usuarios"].find({ edad: { $gte: 21 } })
-
+db["usuarios"].find({ edad: { $gte: 21 } })
 ```
 
-
-
-3\. Mostrar los libros con menos de 350 páginas.
-
-
+3. Mostrar los libros con menos de 350 páginas.
 
 ```javascript
-
-db\\\["libros"].find({ paginas: { $lt: 350 } })
-
+db["libros"].find({ paginas: { $lt: 350 } })
 ```
 
-
-
-4\. Mostrar los usuarios cuya edad sea menor o igual a 20 años.
-
-
+4. Mostrar los usuarios cuya edad sea menor o igual a 20 años.
 
 ```javascript
-
-db\\\["usuarios"].find({ edad: { $lte: 20 } })
-
+db["usuarios"].find({ edad: { $lte: 20 } })
 ```
 
-
-
-5\. Mostrar libros que no sean de Programación.
-
-
+5. Mostrar libros que no sean de Programación.
 
 ```javascript
-
-db\\\["libros"].find({ categoria: { $ne:"Programacion" } })
-
+db["libros"].find({ categoria: { $ne:"Programación" } })
 ```
 
-
-
-6\. Usuarios de Ingeniería Informática de sexto semestre o más.
-
-
+6. Usuarios de Ingeniería Informática de sexto semestre o más.
 
 ```javascript
-
-db\\\["usuarios"].find({
-
-\&#x20;carrera:"Ingeniería Informática",
-
-\&#x20;semestre:{ $gte:6 }
-
+db["usuarios"].find({
+ carrera:"Ingeniería Informática",
+ semestre:{ $gte:6 }
 })
-
 ```
 
-
-
-7\. Libros de Programación o Bases de Datos.
-
-
+7. Libros de Programación o Bases de Datos.
 
 ```javascript
-
-db\\\["libros"].find({
-
-\&#x20;categoria:{ $in:\\\["Programación","Bases de Datos"] }
-
+db["libros"].find({
+ categoria:{ $in:["Programación","Bases de Datos"] }
 })
-
 ```
 
-
-
-8\. Préstamos no devueltos con duración mayor a 8 días.
-
-
+8. Préstamos no devueltos con duración mayor a 8 días.
 
 ```javascript
-
-db\\\["prestamos"].find({
-
-\&#x20;devuelto:false,
-
-\&#x20;dias:{ $gt:8 }
-
+db["prestamos"].find({
+ devuelto:false,
+ dias:{ $gt:8 }
 })
-
 ```
 
-
-
-9\. Libros cuyo título empieza con M.
-
-
+9. Libros cuyo título empieza con M.
 
 ```javascript
-
-db\\\["libros"].find({
-
-\&#x20;titulo:{ $regex:"^M" }
-
+db["libros"].find({
+ titulo:{ $regex:"^M" }
 })
-
 ```
 
-
-
-10\. Usuarios cuyo nombre empieza con A.
-
-
+10. Usuarios cuyo nombre empieza con A.
 
 ```javascript
-
-db\\\["usuarios"].find({
-
-\&#x20;nombre:{ $regex:"^A" }
-
+db["usuarios"].find({
+ nombre:{ $regex:"^A" }
 })
-
 ```
 
-
-
-11\. Libros cuyo título contiene Base.
-
-
+11. Libros cuyo título contiene Base.
 
 ```javascript
-
-db\\\["libros"].find({
-
-\&#x20;titulo:{ $regex:"Base" }
-
+db["libros"].find({
+ titulo:{ $regex:"Base" }
 })
-
 ```
 
-
-
-12\. Mostrar nombre y carrera de usuarios.
-
-
+12. Mostrar nombre y carrera de usuarios.
 
 ```javascript
-
-db\\\["usuarios"].find(
-
+db["usuarios"].find(
 {},
-
-{nombre:1,carrera:1,\\\_id:0}
-
+{nombre:1,carrera:1,_id:0}
 )
-
 ```
 
-
-
-13\. Mostrar título y autor de libros.
-
-
+13. Mostrar título y autor de libros.
 
 ```javascript
-
-db\\\["libros"].find(
-
+db["libros"].find(
 {},
-
-{titulo:1,autor:1,\\\_id:0}
-
+{titulo:1,autor:1,_id:0}
 )
-
 ```
 
-
-
-14\. Mostrar usuario y libro de préstamos.
-
-
+14. Mostrar usuario y libro de préstamos.
 
 ```javascript
-
-db\\\["prestamos"].find(
-
+db["prestamos"].find(
 {},
-
-{usuario:1,libro:1,\\\_id:0}
-
+{usuario:1,libro:1,_id:0}
 )
-
 ```
 
-
-
-15\. Libros ordenados por año más reciente.
-
-
+15. Libros ordenados por año más reciente.
 
 ```javascript
-
-db\\\["libros"].find().sort({anio:-1})
-
+db["libros"].find().sort({anio:-1})
 ```
 
-
-
-16\. Usuarios ordenados por nombre.
-
-
+16. Usuarios ordenados por nombre.
 
 ```javascript
-
-db\\\["usuarios"].find().sort({nombre:1})
-
+db["usuarios"].find().sort({nombre:1})
 ```
 
-
-
-17\. Préstamos ordenados por más días.
-
-
+17. Préstamos ordenados por más días.
 
 ```javascript
-
-db\\\["prestamos"].find().sort({dias:-1})
-
+db["prestamos"].find().sort({dias:-1})
 ```
 
-
-
-18\. Título y año desde 2022 ordenados.
-
-
+18. Título y año desde 2022 ordenados.
 
 ```javascript
-
-db\\\["libros"].find(
-
+db["libros"].find(
 {anio:{$gte:2022}},
-
-{titulo:1,anio:1,\\\_id:0}
-
+{titulo:1,anio:1,_id:0}
 ).sort({anio:-1})
-
 ```
 
-
-
-19\. Usuarios de Sistemas o Informática.
-
-
+19. Usuarios de Sistemas o Informática.
 
 ```javascript
-
-db\\\["usuarios"].find(
-
+db["usuarios"].find(
 {
-
-\&#x20;carrera:{
-
-\&#x20;$in:\\\[
-
-\&#x20;"Ingeniería en Sistemas Computacionales",
-
-\&#x20;"Ingeniería Informática"
-
-\&#x20;]}
-
+ carrera:{
+ $in:[
+ "Ingeniería en Sistemas Computacionales",
+ "Ingeniería Informática"
+ ]}
 },
-
-{nombre:1,carrera:1,\\\_id:0}
-
+{nombre:1,carrera:1,_id:0}
 )
-
 ```
 
-
-
-20\. Préstamos no devueltos mostrando usuario, libro y días.
-
-
+20. Préstamos no devueltos mostrando usuario, libro y días.
 
 ```javascript
-
-db\\\["prestamos"].find(
-
+db["prestamos"].find(
 {devuelto:false},
-
-{usuario:1,libro:1,dias:1,\\\_id:0}
-
+{usuario:1,libro:1,dias:1,_id:0}
 ).sort({dias:-1})
-
 ```
-
