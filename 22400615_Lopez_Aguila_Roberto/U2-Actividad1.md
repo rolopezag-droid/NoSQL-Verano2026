@@ -114,7 +114,7 @@ db["prestamos"].find(
 15. Libros ordenados por año más reciente.
 
 ```javascript
-db["libros"].find().sort({anio:-1})
+db["libros"].find().sort({año:-1})
 ```
 
 16. Usuarios ordenados por nombre.
@@ -126,7 +126,7 @@ db["usuarios"].find().sort({nombre:1})
 17. Préstamos ordenados por más días.
 
 ```javascript
-db["prestamos"].find().sort({dias:-1})
+db["prestamos"].find().sort({diasPrestamo:-1})
 ```
 
 18. Título y año desde 2022 ordenados.
@@ -134,8 +134,8 @@ db["prestamos"].find().sort({dias:-1})
 ```javascript
 db["libros"].find(
 {año:{$gte:2022}},
-{titulo:1,anio:1,_id:0}
-).sort({anio:-1})
+{titulo:1,año:1,_id:0}
+).sort({año:-1})
 ```
 
 19. Usuarios de Sistemas o Informática.
