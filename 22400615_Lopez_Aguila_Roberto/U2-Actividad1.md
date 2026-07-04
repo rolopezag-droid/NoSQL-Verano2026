@@ -5,7 +5,7 @@
 1. Mostrar todos los libros publicados después del año 2022.
 
 ```javascript
-db["libros"].find({ anio: { $gt: 2022 } })
+db["libros"].find({ año: { $gt: 2022 } })
 ```
 
 2. Mostrar los usuarios cuya edad sea mayor o igual a 21 años.
@@ -29,15 +29,15 @@ db["usuarios"].find({ edad: { $lte: 20 } })
 5. Mostrar libros que no sean de Programación.
 
 ```javascript
-db["libros"].find({ categoria: { $ne:"Programación" } })
+db["libros"].find({ categoria: { $ne:"Programacion" } })
 ```
 
 6. Usuarios de Ingeniería Informática de sexto semestre o más.
 
 ```javascript
 db["usuarios"].find({
- carrera:"Ingeniería Informática",
- semestre:{ $gte:6 }
+  carrera: "Ingeniería en Informática",
+  semestre: { $gte: 6 }
 })
 ```
 
@@ -45,17 +45,19 @@ db["usuarios"].find({
 
 ```javascript
 db["libros"].find({
- categoria:{ $in:["Programación","Bases de Datos"] }
+ categoria:{ $in:["Programacion","Bases de Datos"] }
 })
 ```
 
 8. Préstamos no devueltos con duración mayor a 8 días.
 
 ```javascript
-db["prestamos"].find({
- devuelto:false,
- dias:{ $gt:8 }
-})
+{
+  $and: [
+    { devuelto: false },
+    { diasPrestamo: { $gt: 8 } }
+  ]
+}
 ```
 
 9. Libros cuyo título empieza con M.
@@ -78,7 +80,7 @@ db["usuarios"].find({
 
 ```javascript
 db["libros"].find({
- titulo:{ $regex:"Base" }
+  titulo: { $regex:"Base" }
 })
 ```
 
@@ -131,7 +133,7 @@ db["prestamos"].find().sort({dias:-1})
 
 ```javascript
 db["libros"].find(
-{anio:{$gte:2022}},
+{año:{$gte:2022}},
 {titulo:1,anio:1,_id:0}
 ).sort({anio:-1})
 ```
@@ -144,7 +146,7 @@ db["usuarios"].find(
  carrera:{
  $in:[
  "Ingeniería en Sistemas Computacionales",
- "Ingeniería Informática"
+ "Ingeniería en Informática"
  ]}
 },
 {nombre:1,carrera:1,_id:0}
@@ -156,6 +158,6 @@ db["usuarios"].find(
 ```javascript
 db["prestamos"].find(
 {devuelto:false},
-{usuario:1,libro:1,dias:1,_id:0}
-).sort({dias:-1})
+{usuario:1,libro:1,diasPrestamo:1,_id:0}
+).sort({diasPrestamo:-1})
 ```
