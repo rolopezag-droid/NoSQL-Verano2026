@@ -91,6 +91,55 @@ app.get('/peliculas/:id', async (req, res) => {
   }
 });
 
+// Agregar una película
+app.post('/peliculas', async (req, res) => {
+  try {
+    const {
+      titulo,
+      genero,
+      año,
+      duracion,
+      idioma,
+      calificacion
+    } = req.body;
+
+    if (
+      !titulo ||
+      !genero ||
+      !año ||
+      !duracion ||
+      !idioma ||
+      calificacion === undefined
+    ) {
+      return res.status(400).json({
+        mensaje: 'Faltan datos de la película'
+      });
+    }
+
+    const nuevaPelicula = new Pelicula({
+      titulo,
+      genero,
+      año,
+      duracion,
+      idioma,
+      calificacion
+    });
+
+    const peliculaGuardada = await nuevaPelicula.save();
+
+    return res.status(201).json({
+      mensaje: 'Película guardada correctamente',
+      pelicula: peliculaGuardada
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: 'Error al guardar la película',
+      error: error.message
+    });
+  }
+});
+
 // Obtener todas las series
 app.get('/series', async (req, res) => {
   try {
