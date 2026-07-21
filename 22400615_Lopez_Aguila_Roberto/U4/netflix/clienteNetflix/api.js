@@ -21,9 +21,13 @@ async function agregarPelicula(pelicula) {
         body: JSON.stringify(pelicula)
     });
 
+    const datos = await respuesta.json();
+
     if (!respuesta.ok) {
-        throw new Error("Error al guardar la película");
+        throw new Error(
+            datos.mensaje || "Error al guardar la película"
+        );
     }
 
-    return await respuesta.json();
+    return datos;
 }

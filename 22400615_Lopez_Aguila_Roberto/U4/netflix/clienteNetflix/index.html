@@ -1,108 +1,196 @@
-index.html
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Consumir API REST</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            width: 600px;
-            margin: 30px auto;
-        }
+    <title>Netflix | Catálogo</title>
 
-        input {
-            display: block;
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-        }
-
-        button {
-            padding: 10px 15px;
-            margin: 10px 0;
-            cursor: pointer;
-        }
-
-        ul {
-            margin-top: 20px;
-        }
-
-        li {
-            margin: 8px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Películas</h1>
+    <header class="navbar">
+        <a href="#" class="logo">NETFLIX</a>
 
-    <h2>Registrar película</h2>
+        <nav class="menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#catalogo">Películas</a>
+            <a href="#registrar">Agregar película</a>
+        </nav>
 
-    <form id="formulario">
+        <div class="usuario">
+            <span>R</span>
+        </div>
+    </header>
 
-        <input
-            type="text"
-            id="titulo"
-            placeholder="Título"
-            required
-        >
+    <main>
 
-        <input
-            type="text"
-            id="genero"
-            placeholder="Género"
-            required
-        >
+        <section class="hero" id="inicio">
 
-        <input
-            type="number"
-            id="año"
-            placeholder="Año"
-            required
-        >
+            <div class="hero-contenido">
 
-        <input
-            type="number"
-            id="duracion"
-            placeholder="Duración"
-            required
-        >
+                <span class="etiqueta">PELÍCULA DESTACADA</span>
 
-        <input
-            type="text"
-            id="idioma"
-            placeholder="Idioma"
-            required
-        >
+                <h1>Tu catálogo personal</h1>
 
-        <input
-            type="number"
-            id="calificacion"
-            placeholder="Calificación"
-            min="0"
-            max="10"
-            step="0.1"
-            required
-        >
+                <p>
+                    Consulta las películas disponibles y registra nuevos
+                    títulos directamente en MongoDB mediante tu API REST.
+                </p>
 
-        <button type="submit">
-            Guardar película
-        </button>
+                <div class="hero-botones">
+                    <a href="#catalogo" class="btn btn-principal">
+                        ▶ Ver catálogo
+                    </a>
 
-    </form>
+                    <a href="#registrar" class="btn btn-secundario">
+                        ＋ Agregar película
+                    </a>
+                </div>
 
-    <hr>
+            </div>
 
-    <button id="btnConsultar">
-        Consultar películas
-    </button>
+            <div class="hero-sombra"></div>
 
-    <ul id="listaPeliculas"></ul>
+        </section>
+
+        <section class="seccion catalogo-seccion" id="catalogo">
+
+            <div class="encabezado-seccion">
+                <div>
+                    <p class="subtitulo">EXPLORA</p>
+                    <h2>Películas disponibles</h2>
+                </div>
+
+                <button id="btnConsultar" class="btn btn-consultar">
+                    Actualizar catálogo
+                </button>
+            </div>
+
+            <p id="estadoCatalogo" class="estado"></p>
+
+            <div id="listaPeliculas" class="catalogo"></div>
+
+        </section>
+
+        <section class="seccion formulario-seccion" id="registrar">
+
+            <div class="formulario-contenedor">
+
+                <div class="formulario-info">
+
+                    <p class="subtitulo">NUEVO ESTRENO</p>
+
+                    <h2>Registrar película</h2>
+
+                    <p>
+                        Agrega una película nueva al catálogo. Los datos se
+                        guardarán en MongoDB Atlas mediante la API publicada
+                        en Vercel.
+                    </p>
+
+                    <div class="datos-api">
+                        <span>API REST</span>
+                        <span>Express</span>
+                        <span>MongoDB</span>
+                        <span>Vercel</span>
+                    </div>
+
+                </div>
+
+                <form id="formulario" class="formulario">
+
+                    <div class="campo campo-completo">
+                        <label for="titulo">Título</label>
+                        <input
+                            type="text"
+                            id="titulo"
+                            placeholder="Ejemplo: Interestelar"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="genero">Género</label>
+                        <input
+                            type="text"
+                            id="genero"
+                            placeholder="Ciencia ficción"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="año">Año</label>
+                        <input
+                            type="number"
+                            id="año"
+                            placeholder="2026"
+                            min="1888"
+                            max="2100"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="duracion">Duración</label>
+                        <input
+                            type="number"
+                            id="duracion"
+                            placeholder="120 minutos"
+                            min="1"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="idioma">Idioma</label>
+                        <input
+                            type="text"
+                            id="idioma"
+                            placeholder="Español"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo campo-completo">
+                        <label for="calificacion">Calificación</label>
+                        <input
+                            type="number"
+                            id="calificacion"
+                            placeholder="8.5"
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-guardar">
+                        Guardar película
+                    </button>
+
+                    <p id="mensajeFormulario" class="mensaje-formulario"></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>
+            Cliente Netflix · API REST con Express, MongoDB y Vercel
+        </p>
+    </footer>
 
     <script src="api.js"></script>
     <script src="app.js"></script>
