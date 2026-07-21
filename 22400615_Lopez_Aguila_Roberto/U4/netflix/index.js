@@ -28,9 +28,7 @@ mongoose.connect(
 
 // Ruta principal para comprobar que la API funciona
 app.get('/', (req, res) => {
-  res.json({
-    mensaje: 'API de Netflix funcionando correctamente'
-  });
+    res.send('API de Netflix funcionando correctamente');
 });
 
 // Colección películas
