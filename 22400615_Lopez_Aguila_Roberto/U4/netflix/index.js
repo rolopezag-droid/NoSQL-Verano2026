@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dns = require('dns');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,9 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Servir archivos estáticos
-app.use(express.static(__dirname));
-
 mongoose.connect(
   'mongodb+srv://grupo:grupo@servidorprueba.ygegryf.mongodb.net/netflix'
 )
@@ -30,9 +26,9 @@ mongoose.connect(
   console.error('Error al conectar a MongoDB:', error);
 });
 
-// Página principal
+// Ruta principal de la API
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.send('API de Netflix funcionando correctamente');
 });
 
 // =======================
