@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://api-netflix-navy.vercel.app/#catalogo";
 
 async function procesarRespuesta(respuesta, mensajeError) {
     let datos = null;
