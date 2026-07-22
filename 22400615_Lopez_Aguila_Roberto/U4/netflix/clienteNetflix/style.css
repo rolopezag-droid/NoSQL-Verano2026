@@ -300,7 +300,9 @@ a {
 
 .tarjeta {
     position: relative;
-    min-height: 350px;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 2 / 3;
 
     border: 1px solid var(--borde);
     border-radius: 9px;
@@ -329,7 +331,8 @@ a {
     display: flex;
     align-items: flex-end;
 
-    min-height: 350px;
+    width: 100%;
+    height: 100%;
     padding: 20px;
 
     overflow: hidden;
@@ -338,6 +341,7 @@ a {
 .poster::before {
     position: absolute;
     inset: 0;
+    z-index: 1;
 
     content: "";
 
@@ -360,6 +364,7 @@ a {
     position: absolute;
     right: -18px;
     top: 15px;
+    z-index: 0;
 
     content: attr(data-letra);
 
@@ -367,6 +372,44 @@ a {
     font-size: 220px;
     font-weight: 900;
     line-height: 1;
+}
+
+/* Portada recibida desde la API */
+.poster-imagen {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 0.3s ease;
+}
+
+/* Oscurece la parte inferior para que los datos se lean */
+.poster.con-portada::before {
+    opacity: 1;
+
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.98) 0%,
+        rgba(0, 0, 0, 0.78) 28%,
+        rgba(0, 0, 0, 0.28) 58%,
+        rgba(0, 0, 0, 0.05) 100%
+    );
+}
+
+/* Cuando hay imagen ya no se muestra la letra decorativa */
+.poster.con-portada::after {
+    display: none;
+}
+
+.tarjeta:hover .poster-imagen {
+    transform: scale(1.06);
 }
 
 .poster-contenido {
@@ -396,7 +439,7 @@ a {
     border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 4px;
 
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.55);
     font-size: 0.73rem;
 }
 
@@ -604,11 +647,6 @@ a {
     .catalogo {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
-    }
-
-    .tarjeta,
-    .poster {
-        min-height: 285px;
     }
 
     .poster {

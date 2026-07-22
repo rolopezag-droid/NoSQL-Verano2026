@@ -74,6 +74,7 @@ async function cargarPeliculas() {
     } catch (error) {
         estadoCatalogo.textContent = error.message;
 
+        
         listaPeliculas.innerHTML = `
             <p>No fue posible cargar el catálogo.</p>
         `;
@@ -92,45 +93,56 @@ function mostrarPeliculas(peliculas) {
         const nombre = pelicula.titulo || "Sin título";
         const letra = nombre.charAt(0).toUpperCase();
 
-        tarjeta.innerHTML = `
-            <div
-                class="poster ${estilo}"
-                data-letra="${letra}"
-            >
-                <div class="poster-contenido">
+        const tienePortada =
+    typeof pelicula.portada === "string" &&
+    pelicula.portada.trim() !== "";
 
-                    <h3>${nombre}</h3>
+tarjeta.innerHTML = `
+    <div
+        class="poster ${estilo} ${tienePortada ? "con-portada" : ""}"
+        data-letra="${letra}"
+    >
+        ${
+            tienePortada
+                ? `
+                    <img
+                        src="${pelicula.portada}"
+                        alt="Portada de ${nombre}"
+                        class="poster-imagen"
+                        onerror="
+                            this.remove();
+                            this.parentElement.classList.remove('con-portada');
+                        "
+                    >
+                `
+                : ""
+        }
 
-                    <div class="poster-datos">
+        <div class="poster-contenido">
+            <h3>${nombre}</h3>
 
-                        <span>
-                            ${pelicula.año || "Sin año"}
-                        </span>
+            <div class="poster-datos">
+                <span>${pelicula.año || "Sin año"}</span>
 
-                        <span>
-                            ${pelicula.genero || "Sin género"}
-                        </span>
+                <span>${pelicula.genero || "Sin género"}</span>
 
-                        <span>
-                            ${pelicula.duracion
-                                ? `${pelicula.duracion} min`
-                                : "Sin duración"
-                            }
-                        </span>
+                <span>
+                    ${
+                        pelicula.duracion
+                            ? `${pelicula.duracion} min`
+                            : "Sin duración"
+                    }
+                </span>
 
-                        <span>
-                            ${pelicula.idioma || "Sin idioma"}
-                        </span>
+                <span>${pelicula.idioma || "Sin idioma"}</span>
 
-                        <span class="calificacion">
-                            ★ ${pelicula.calificacion ?? "N/A"}
-                        </span>
-
-                    </div>
-
-                </div>
+                <span class="calificacion">
+                    ★ ${pelicula.calificacion ?? "N/A"}
+                </span>
             </div>
-        `;
+        </div>
+    </div>
+`;
 
         listaPeliculas.appendChild(tarjeta);
     });
