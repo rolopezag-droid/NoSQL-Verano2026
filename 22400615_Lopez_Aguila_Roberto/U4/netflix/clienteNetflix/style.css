@@ -292,6 +292,25 @@ a {
 
 /* Catálogo */
 
+.tipo-contenido {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 7px;
+
+    border-radius: 4px;
+
+    color: #ffffff;
+    background-color: #e50914;
+
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.series-seccion {
+    background-color: #0d0d0d;
+}
+
 .catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
@@ -665,5 +684,74 @@ a {
     .btn-guardar,
     .mensaje-formulario {
         grid-column: auto;
+    }
+}
+/* Selector entre películas y series */
+.selector-catalogo {
+    display: flex;
+    gap: 10px;
+    margin: 0 0 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.tab-catalogo {
+    min-height: 42px;
+    padding: 0 22px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: var(--gris);
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 700;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab-catalogo:hover {
+    color: var(--blanco);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.tab-catalogo.activo {
+    color: var(--blanco);
+    background-color: var(--rojo);
+    border-color: var(--rojo);
+}
+
+.panel-catalogo {
+    display: none;
+}
+
+.panel-catalogo.activo {
+    display: block;
+}
+
+.panel-catalogo[hidden] {
+    display: none;
+}
+
+.catalogo-vacio,
+.mensaje-error {
+    grid-column: 1 / -1;
+    padding: 30px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    color: var(--gris);
+    background-color: rgba(255, 255, 255, 0.03);
+    text-align: center;
+}
+
+@media (max-width: 560px) {
+    .selector-catalogo {
+        width: 100%;
+    }
+
+    .tab-catalogo {
+        flex: 1;
+        padding: 0 12px;
+    }
+
+    .btn-consultar {
+        width: 100%;
     }
 }

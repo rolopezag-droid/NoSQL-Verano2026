@@ -1,14 +1,43 @@
-const API_URL = "https://netflix-xi-rust.vercel.app";
+const API_URL = "http://localhost:3000";
+
+async function procesarRespuesta(respuesta, mensajeError) {
+    let datos = null;
+
+    try {
+        datos = await respuesta.json();
+    } catch (error) {
+        datos = null;
+    }
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos?.mensaje ||
+            datos?.message ||
+            mensajeError
+        );
+    }
+
+    return datos;
+}
 
 // Obtener películas
 async function obtenerPeliculas() {
     const respuesta = await fetch(`${API_URL}/peliculas`);
 
-    if (!respuesta.ok) {
-        throw new Error("Error al consultar las películas");
-    }
+    return procesarRespuesta(
+        respuesta,
+        "Error al consultar las películas"
+    );
+}
 
-    return await respuesta.json();
+// Obtener series
+async function obtenerSeries() {
+    const respuesta = await fetch(`${API_URL}/series`);
+
+    return procesarRespuesta(
+        respuesta,
+        "Error al consultar las series"
+    );
 }
 
 // Agregar película
@@ -21,13 +50,8 @@ async function agregarPelicula(pelicula) {
         body: JSON.stringify(pelicula)
     });
 
-    const datos = await respuesta.json();
-
-    if (!respuesta.ok) {
-        throw new Error(
-            datos.mensaje || "Error al guardar la película"
-        );
-    }
-
-    return datos;
+    return procesarRespuesta(
+        respuesta,
+        "Error al guardar la película"
+    );
 }
